@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+Lavragem-titubeou-bebia0import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { AppController } from './app.controller';
@@ -13,8 +13,6 @@ import { Place } from './entities/place.entity';
 import { Favorite } from './entities/favourite.entity';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailConfigModule } from './users/mailer.module';
-import { Visited } from './entities/visited.entity';
-import { VisitedModule } from './visited/visited.module';
 
 @Module({
   imports: [
@@ -25,15 +23,14 @@ import { VisitedModule } from './visited/visited.module';
       username: 'root',
       password: 'Lavragem-titubeou-bebia0',
       database: 'restaurantes',
-      entities: [User, Place, Favorite, Visited],
+      entities: [User, Place, Favorite],
     }),
     UsersModule,
     AuthModule,
     PlacesModule,
     FavoritesModule,
     MailerModule,
-    MailConfigModule,
-    VisitedModule
+    MailConfigModule
   ],
   controllers: [AppController],
   providers: [

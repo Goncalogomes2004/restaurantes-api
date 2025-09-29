@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, BeforeInsert, OneToMany } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { Favorite } from "./favourite.entity";
+import { Visited } from "./visited.entity";
 
 @Entity("user")
 @Unique(["email"])
@@ -16,7 +18,10 @@ export class User {
     @Column({ length: 100 })
     password: string;
 
-
+    @OneToMany(() => Favorite, (favorite) => favorite.user)
+    favorites: Favorite[];
+    @OneToMany(() => Visited, (visited) => visited.user)
+    visited: Visited[];
     @BeforeInsert()
     private async onBeforeInsert() {
         this.password = await bcrypt.hash(this.password, bcrypt.genSaltSync(10));

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
 import { User } from 'src/entities/user.entity';
 import { UsersService } from './user.service';
 import { Public } from 'src/decorators/public.decorator';
+import { enableCompileCache } from 'module';
 
 
 @Controller('users')
@@ -22,6 +23,21 @@ export class UsersController {
     @Public()
     create(@Body() user: Partial<User>): Promise<User> {
         return this.usersService.create(user);
+    }
+    @Post('change-password')
+    @Public()
+    async changePassword(
+        @Body('email') email: string,
+        @Body('newPassword') newPassword: string,
+    ) {
+        return this.usersService.changePassword(email, newPassword);
+    }
+
+
+    @Public()
+    @Post('recover')
+    async recover(@Body('email') email: string) {
+        return this.usersService.sendRecoveryEmail(email);
     }
 
     @Public()
