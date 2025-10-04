@@ -20,8 +20,8 @@ import { VisitedModule } from './visited/visited.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '10.11.150.6',
-      port: 4003,
+      host: 'db',
+      port: 3306,
       username: 'root',
       password: 'Lavragem-titubeou-bebia0',
       database: 'restaurantes',
